@@ -1,74 +1,82 @@
 media:
   input: public/assets
   output: /assets
-
 content:
   - name: blog
     label: Blog Posts
     type: collection
-    path: src/content/blog
+    path: src/data/blog
     format: yaml-frontmatter
-    filename: "{primary}.md"
-
+    filename: '{primary}.md'
     view:
       primary: title
       sort: pubDatetime
       order: desc
-
+      fields:
+        - title
+        - pubDatetime
+        - tags
+        - featured
+        - draft
     fields:
       - name: title
         label: Title
         type: string
         required: true
-
       - name: description
         label: Description
         type: text
         required: true
-
       - name: pubDatetime
-        label: Publish Date
+        label: Publish date
         type: date
         required: true
-
+        options:
+          format: 'yyyy-MM-dd''T''HH:mm:ssXXX'
+          time: true
       - name: modDatetime
-        label: Modified Date
+        label: Modified date
         type: date
-
+        options:
+          format: 'yyyy-MM-dd''T''HH:mm:ssXXX'
+          time: true
       - name: author
         label: Author
         type: string
-
-      - name: featured
-        label: Featured Post
-        type: boolean
-
-      - name: draft
-        label: Draft
-        type: boolean
-
       - name: tags
         label: Tags
         type: string
         list: true
-
+        default:
+          - others
+      - name: featured
+        label: Featured post
+        type: boolean
+        default: false
+      - name: draft
+        label: Draft
+        type: boolean
+        default: false
       - name: ogImage
-        label: OG Image
+        label: OG image
         type: image
-
       - name: canonicalURL
         label: Canonical URL
         type: string
-
+      - name: hideEditPost
+        label: Hide "edit post" link
+        type: boolean
+        default: false
+      - name: timezone
+        label: Timezone (IANA)
+        type: string
       - name: body
         label: Content
         type: rich-text
-
   - name: site-config
-    label: Site Config
+    label: Site config
     type: file
     path: src/config.ts
     format: code
-
 settings:
   hide: false
