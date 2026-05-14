@@ -1,0 +1,74 @@
+media:
+  input: public/assets
+  output: /assets
+
+content:
+  - name: blog
+    label: Blog Posts
+    type: collection
+    path: src/content/blog
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+
+    view:
+      primary: title
+      sort: pubDatetime
+      order: desc
+
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+
+      - name: description
+        label: Description
+        type: text
+        required: true
+
+      - name: pubDatetime
+        label: Publish Date
+        type: date
+        required: true
+
+      - name: modDatetime
+        label: Modified Date
+        type: date
+
+      - name: author
+        label: Author
+        type: string
+
+      - name: featured
+        label: Featured Post
+        type: boolean
+
+      - name: draft
+        label: Draft
+        type: boolean
+
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+
+      - name: ogImage
+        label: OG Image
+        type: image
+
+      - name: canonicalURL
+        label: Canonical URL
+        type: string
+
+      - name: body
+        label: Content
+        type: rich-text
+
+  - name: site-config
+    label: Site Config
+    type: file
+    path: src/config.ts
+    format: code
+
+settings:
+  hide: false
